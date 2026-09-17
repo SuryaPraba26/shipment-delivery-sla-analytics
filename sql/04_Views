@@ -1,0 +1,19 @@
+-- 24. Create a view named Shipment_Performance_View.
+create view shipment_performance_view as
+select o.order_id,c.customer_name as customer,w.warehouse_name as warehouse,
+ca.carrier_name as carrier,s.shipment_date,s.expected_delivery,s.actual_delivery,
+datediff(s.actual_delivery,s.shipment_date) as delivery_days,
+case when s.actual_delivery<=s.expected_delivery then 'on time'
+else 'sla breached'
+end as sla_status
+from shipments s
+join orders o
+on s.order_id = o.order_id
+join customers c
+on o.customer_id = c.customer_id
+join warehouses w
+on s.warehouse_id = w.warehouse_id
+join carriers ca
+on s.carrier_id = ca.carrier_id;
+
+select*from shipment_performance_view;
