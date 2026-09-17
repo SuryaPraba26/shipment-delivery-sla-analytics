@@ -1,0 +1,15 @@
+-- 25. Create indexes for Customer_ID, Order_ID, Shipment_ID, Carrier_ID and Shipment_Date.
+create index idx_customer_id
+on orders(customer_id);
+
+create index idx_order_id
+on shipments(order_id);
+
+create index idx_shipment_id
+on delivery_tracking(shipment_id);
+
+create index idx_carrier_id
+on shipments(carrier_id);
+
+create index idx_shipment_date
+on shipments(shipment_date);
